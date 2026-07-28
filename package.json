@@ -1,6 +1,6 @@
 {
   "name": "@wevm/incur-demo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A small Incur CLI with standalone binary releases.",
   "private": true,
   "type": "module",
