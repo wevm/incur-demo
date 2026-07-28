@@ -37,7 +37,7 @@ jobs:
         uses: changesets/action@v1
         with:
           commit: 'chore: version package'
-          createGithubReleases: false
+          createGithubReleases: true
           publish: npm run release
           title: 'chore: version package'
           version: npm run version
@@ -52,39 +52,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Create draft release
-        id: release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          version="$(jq -r '.version' package.json)"
-          tag="v${version}"
-
-          git config user.name 'github-actions[bot]'
-          git config user.email \
-            '41898282+github-actions[bot]@users.noreply.github.com'
-          git tag -a "$tag" "$GITHUB_SHA" -m "$tag"
-          git push origin "$tag"
-
-          gh release create "$tag" \
-            --draft \
-            --generate-notes \
-            --title "$tag" \
-            --verify-tag
-
-          printf 'tag=%s\n' "$tag" >> "$GITHUB_OUTPUT"
-
       - name: Build and upload binaries
         uses: wevm/incur/release@v1
         with:
-          release_tag: ${{ steps.release.outputs.tag }}
           smoke_command: ping
-
-      - name: Publish GitHub release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ steps.release.outputs.tag }}
-        run: gh release edit "$RELEASE_TAG" --draft=false

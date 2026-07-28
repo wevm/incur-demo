@@ -52,12 +52,12 @@ npm run changeset
 ```
 
 Pushes to `main` update a Changesets version pull request. Before merging the
-first version pull request, add an npm automation token as the `NPM_TOKEN`
-repository secret.
+first version pull request, add a granular npm access token with package write
+access and bypass 2FA as the `NPM_TOKEN` repository secret.
 
-Merging the version pull request publishes the npm package, creates the matching
-`v<version>` tag and draft GitHub Release, builds all supported standalone
-executables with `wevm/incur/release@v1`, and publishes the completed release.
+Merging the version pull request uses Changesets to publish the npm package and
+matching `v<version>` GitHub Release. The `wevm/incur/release@v1` step then
+builds and uploads all supported standalone executables.
 
 Run the same checks locally:
 
