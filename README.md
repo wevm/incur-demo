@@ -58,8 +58,6 @@ repository secret.
 Merging the version pull request publishes the npm package, creates the matching
 `v<version>` tag and draft GitHub Release, builds all supported standalone
 executables with `wevm/incur/release@v1`, and publishes the completed release.
-If the binary phase needs to be retried after npm publication, run the
-`Release` workflow manually.
 
 Run the same checks locally:
 
