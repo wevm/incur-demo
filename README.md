@@ -1,13 +1,13 @@
 # Incur demo
 
-A small [Incur](https://github.com/wevm/incur) CLI that ships through npm and
-as standalone macOS, Linux, and Windows executables.
+A small [Incur](https://github.com/wevm/incur) CLI that ships as standalone
+macOS, Linux, and Windows executables.
 
 ## Run locally
 
 ```sh
-npm install
-npm run dev -- greet Ada
+pnpm install
+pnpm run dev greet Ada
 ```
 
 ```text
@@ -17,19 +17,12 @@ message: Hello, Ada!
 The CLI also exposes a deterministic smoke command:
 
 ```sh
-npm run dev -- ping
+pnpm run dev ping
 ```
 
 ## Install
 
-After the first release, install the npm package:
-
-```sh
-npm install --global @wevm/incur-demo
-incur-demo greet Ada
-```
-
-Or install the standalone executable:
+After the first release, install the standalone executable:
 
 ```sh
 curl -fsSL https://github.com/wevm/incur-demo/releases/latest/download/install.sh | sh
@@ -39,30 +32,27 @@ curl -fsSL https://github.com/wevm/incur-demo/releases/latest/download/install.s
 irm https://github.com/wevm/incur-demo/releases/latest/download/install.ps1 | iex
 ```
 
-Both distributions support `incur-demo --update`. Package installations update
-through npm. Standalone executables download the matching verified GitHub
-Release asset. The standalone executables are unsigned.
+The executable supports `incur-demo --update`, which downloads the matching
+verified GitHub Release asset. The standalone executables are unsigned.
 
 ## Release
 
 Add a Changeset with each user-facing change:
 
 ```sh
-npm run changeset
+pnpm run changeset
 ```
 
-Pushes to `main` update a Changesets version pull request. Before merging the
-first version pull request, add a granular npm access token with package write
-access and bypass 2FA as the `NPM_TOKEN` repository secret.
-
-Merging the version pull request uses Changesets to publish the npm package and
-matching `v<version>` GitHub Release. The `wevm/incur/release@v1` step then
-builds and uploads all supported standalone executables.
+Pushes to `main` update a Changesets version pull request. Merging the version
+pull request uses Changesets to create the matching `v<version>` tag and GitHub
+Release without publishing to the npm registry. The `wevm/incur/release@v1`
+step then builds and uploads all supported standalone executables.
 
 Run the same checks locally:
 
 ```sh
-npm run check
-npm exec -- changeset status
-npm pack --dry-run
+pnpm run check:types
+pnpm test
+pnpm run build
+pnpm exec changeset status
 ```

@@ -15,14 +15,23 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          cache: npm
+          cache: pnpm
           node-version: 24
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      - name: Check
-        run: npm run check
+      - name: Check types
+        run: pnpm run check:types
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build standalone binaries
+        run: pnpm run build
