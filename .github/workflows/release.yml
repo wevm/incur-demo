@@ -23,27 +23,29 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          cache: npm
+          cache: pnpm
           node-version: 24
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      - name: Create version PR or publish
+      - name: Create version PR or release
         id: changesets
         uses: changesets/action@v1
         with:
           commit: 'chore: version package'
           createGithubReleases: true
-          publish: npm run release
+          publish: pnpm run release
           title: 'chore: version package'
-          version: npm run version
+          version: pnpm run version
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   binaries:
     if: needs.changesets.outputs.published == 'true'
