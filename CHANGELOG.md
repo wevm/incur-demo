@@ -1,4 +1,4 @@
-# @wevm/incur-demo
+# incur-demo
 
 ## 0.0.2
 
