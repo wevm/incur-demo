@@ -1,4 +1,4 @@
-# Incur demo
+# A Demonstration of `incur`
 
 A small [Incur](https://github.com/wevm/incur) CLI that ships through npm and
 as standalone macOS, Linux, and Windows executables.
