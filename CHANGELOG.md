@@ -1,5 +1,11 @@
 # incur-demo
 
+## 0.0.3
+
+### Patch Changes
+
+- eb3a0c8: Renamed the npm package to `incur-demo` and restored its public CLI distribution.
+
 ## 0.0.2
 
 ### Patch Changes

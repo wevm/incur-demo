@@ -26,7 +26,7 @@
   },
   "[!start-pkg]": "",
   "name": "incur-demo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A small Incur CLI with npm and standalone binary releases.",
   "type": "module",
   "license": "MIT",
