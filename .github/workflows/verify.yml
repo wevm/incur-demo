@@ -33,5 +33,8 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Build standalone binaries
+      - name: Build npm package
         run: pnpm run build
+
+      - name: Build standalone binaries
+        run: pnpm run build:binaries
